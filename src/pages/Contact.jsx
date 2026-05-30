@@ -10,12 +10,14 @@ import {
   FaFileDownload,
   FaPaperPlane,
 } from 'react-icons/fa';
+
 const CONTACT = {
   email: 'mrcmsmohith04@gmail.com',
   phone: '+91 73582 31435',
   phoneHref: 'tel:+917358231435',
   location: 'India',
 };
+
 const SOCIAL_LINKS = [
   {
     id: 'github',
@@ -48,28 +50,32 @@ const SOCIAL_LINKS = [
   {
     id: 'resume',
     label: 'Resume',
-    href: '/resume.pdf',
+    href: '/mohithResume.pdf',
     icon: FaFileDownload,
     color: '#7b2cbf',
-    download: true,
   },
 ];
+
 const EXPLORING = [
   'MERN Stack',
   'AI-powered applications',
   'Secure Web Development',
 ];
+
 const Contact = () => {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [status, setStatus] = useState({ type: '', message: '' });
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
     setStatus({ type: '', message: '' });
+
     const accessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY;
     if (!accessKey) {
       setStatus({
@@ -80,6 +86,7 @@ const Contact = () => {
       setIsSubmitting(false);
       return;
     }
+
     try {
       const response = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
@@ -97,7 +104,9 @@ const Contact = () => {
           replyto: formData.email,
         }),
       });
+
       const data = await response.json();
+
       if (response.ok && data.success) {
         setStatus({
           type: 'success',
@@ -119,6 +128,7 @@ const Contact = () => {
       setIsSubmitting(false);
     }
   };
+
   return (
     <div className="contact-page">
       <section className="section contact-section">
@@ -138,6 +148,7 @@ const Contact = () => {
               <p className="response-note">Usually responds within 24 hours</p>
             </div>
           </AnimatedSection>
+
           <div className="contact-grid">
             <AnimatedSection animation="fadeInLeft">
               <div className="contact-panel">
@@ -171,9 +182,10 @@ const Contact = () => {
                     </div>
                   </div>
                 </div>
+
                 <h4 className="panel-subtitle">Connect on social</h4>
                 <div className="social-icons">
-                  {SOCIAL_LINKS.map(({ id, label, href, icon: Icon, color, download }) => (
+                  {SOCIAL_LINKS.map(({ id, label, href, icon: Icon, color }) => (
                     <a
                       key={id}
                       href={href}
@@ -181,14 +193,15 @@ const Contact = () => {
                       target={id === 'email' ? '_self' : '_blank'}
                       rel="noopener noreferrer"
                       aria-label={label}
-                      title={label}
-                      download={download || undefined}
+                      title={id === 'resume' ? 'View or download resume (PDF)' : label}
+                      download={id === 'resume' ? 'Mohith_Resume.pdf' : undefined}
                       style={{ '--brand': color }}
                     >
                       <Icon />
                     </a>
                   ))}
                 </div>
+
                 <div className="exploring-block">
                   <h4 className="panel-subtitle">Currently exploring</h4>
                   <ul className="exploring-list">
@@ -199,6 +212,7 @@ const Contact = () => {
                 </div>
               </div>
             </AnimatedSection>
+
             <AnimatedSection animation="fadeInRight">
               <form className="contact-form" onSubmit={handleSubmit}>
                 <h3 className="panel-title">Send a message</h3>
@@ -262,6 +276,7 @@ const Contact = () => {
           </div>
         </div>
       </section>
+
       <style>{`
         .contact-page {
           --text: #475569;
@@ -562,4 +577,5 @@ const Contact = () => {
     </div>
   );
 };
+
 export default Contact;

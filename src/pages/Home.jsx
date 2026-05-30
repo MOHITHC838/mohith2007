@@ -47,11 +47,10 @@ const SOCIAL_LINKS = [
   {
     id: 'resume',
     label: 'Resume',
-    // Put your PDF at: public/resume.pdf
-    href: '/resume.pdf',
+    // File: public/mohithResume.pdf → URL: /mohithResume.pdf
+    href: '/mohithResume.pdf',
     icon: FaFileDownload,
     color: '#7b2cbf',
-    download: true,
   },
 ];
 
@@ -118,7 +117,7 @@ const Home = () => {
           </p>
 
           <div className="social-icons">
-            {SOCIAL_LINKS.map(({ id, label, href, icon: Icon, color, download }) => (
+            {SOCIAL_LINKS.map(({ id, label, href, icon: Icon, color }) => (
               <a
                 key={id}
                 href={href}
@@ -126,8 +125,8 @@ const Home = () => {
                 target={id === 'email' ? '_self' : '_blank'}
                 rel="noopener noreferrer"
                 aria-label={label}
-                title={label}
-                download={download || undefined}
+                title={id === 'resume' ? 'View or download resume (PDF)' : label}
+                download={id === 'resume' ? 'Mohith_Resume.pdf' : undefined}
                 style={{ '--brand-color': color }}
               >
                 <Icon />
