@@ -302,3 +302,15 @@
     --sidebar-width: 56px;
   }
 }
+
+@media (max-width: 768px) {
+  :root {
+    --sidebar-width: 0px;  /* was 60px */
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --sidebar-width: 0px;  /* was 56px */
+  }
+}

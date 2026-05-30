@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import {
   FaHome,
@@ -8,6 +8,8 @@ import {
   FaCertificate,
   FaTrophy,
   FaEnvelope,
+  FaBars,
+  FaTimes,
 } from 'react-icons/fa';
 
 const NAV_ITEMS = [
@@ -20,19 +22,97 @@ const NAV_ITEMS = [
   { path: '/contact', icon: FaEnvelope, label: 'Contact' },
 ];
 
+const MOBILE_BREAKPOINT = 768;
+const SIDEBAR_WIDTH_DESKTOP = '72px';
+const SIDEBAR_WIDTH_MOBILE_OPEN = '72px';
+
 const Navbar = () => {
   const location = useLocation();
+  const [isOpen, setIsOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(
+    () => typeof window !== 'undefined' && window.innerWidth <= MOBILE_BREAKPOINT
+  );
 
+  // Detect mobile vs desktop
   useEffect(() => {
-    document.documentElement.style.setProperty('--sidebar-width', '72px');
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= MOBILE_BREAKPOINT);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  // Close sidebar when route changes (mobile)
+  useEffect(() => {
+    setIsOpen(false);
+  }, [location.pathname]);
+
+  // Close sidebar when resizing to desktop
+  useEffect(() => {
+    if (!isMobile) setIsOpen(false);
+  }, [isMobile]);
+
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (isMobile && isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isMobile, isOpen]);
+
+  // Update layout offset for App.jsx main content
+  useEffect(() => {
+    if (isMobile) {
+      document.documentElement.style.setProperty(
+        '--sidebar-width',
+        isOpen ? SIDEBAR_WIDTH_MOBILE_OPEN : '0px'
+      );
+    } else {
+      document.documentElement.style.setProperty('--sidebar-width', SIDEBAR_WIDTH_DESKTOP);
+    }
     return () => {
       document.documentElement.style.removeProperty('--sidebar-width');
     };
-  }, []);
+  }, [isMobile, isOpen]);
+
+  const toggleSidebar = () => setIsOpen((prev) => !prev);
+  const closeSidebar = () => setIsOpen(false);
 
   return (
     <>
-      <aside className="sidebar-nav" aria-label="Main navigation">
+      {/* Mobile menu button — only on small screens */}
+      {isMobile && (
+        <button
+          type="button"
+          className="sidebar-toggle"
+          onClick={toggleSidebar}
+          aria-label={isOpen ? 'Close navigation menu' : 'Open navigation menu'}
+          aria-expanded={isOpen}
+        >
+          {isOpen ? <FaTimes /> : <FaBars />}
+        </button>
+      )}
+
+      {/* Dark overlay behind sidebar on mobile */}
+      {isMobile && isOpen && (
+        <button
+          type="button"
+          className="sidebar-backdrop"
+          onClick={closeSidebar}
+          aria-label="Close navigation menu"
+        />
+      )}
+
+      <aside
+        className={`sidebar-nav ${isMobile ? 'sidebar-nav--mobile' : ''} ${isOpen ? 'sidebar-nav--open' : ''}`}
+        aria-label="Main navigation"
+        aria-hidden={isMobile && !isOpen}
+      >
         <div className="sidebar-inner">
           <nav className="sidebar-links">
             {NAV_ITEMS.map(({ path, icon: Icon, label }) => {
@@ -44,6 +124,7 @@ const Navbar = () => {
                   className={`sidebar-link ${isActive ? 'active' : ''}`}
                   aria-label={label}
                   title={label}
+                  onClick={closeSidebar}
                 >
                   <span className="sidebar-icon-wrap">
                     <Icon className="sidebar-icon" />
@@ -57,6 +138,48 @@ const Navbar = () => {
       </aside>
 
       <style>{`
+        .sidebar-toggle {
+          display: none;
+          position: fixed;
+          top: 16px;
+          left: 16px;
+          z-index: 1100;
+          width: 44px;
+          height: 44px;
+          border: none;
+          border-radius: 12px;
+          align-items: center;
+          justify-content: center;
+          font-size: 1.25rem;
+          color: #0f172a;
+          background: rgba(255, 255, 255, 0.95);
+          box-shadow: 0 4px 16px rgba(15, 23, 42, 0.12);
+          cursor: pointer;
+          transition: transform 0.2s ease, background 0.2s ease;
+        }
+
+        .sidebar-toggle:hover {
+          transform: scale(1.05);
+          background: #fff;
+        }
+
+        .sidebar-backdrop {
+          position: fixed;
+          inset: 0;
+          z-index: 999;
+          border: none;
+          padding: 0;
+          margin: 0;
+          background: rgba(15, 23, 42, 0.45);
+          cursor: pointer;
+          animation: fadeIn 0.25s ease;
+        }
+
+        @keyframes fadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+
         .sidebar-nav {
           position: fixed;
           top: 0;
@@ -68,7 +191,16 @@ const Navbar = () => {
           display: flex;
           align-items: center;
           justify-content: center;
-          pointer-events: auto;
+          transition: transform 0.3s ease;
+        }
+
+        .sidebar-nav--mobile {
+          width: 72px;
+          transform: translateX(-100%);
+        }
+
+        .sidebar-nav--mobile.sidebar-nav--open {
+          transform: translateX(0);
         }
 
         .sidebar-inner {
@@ -78,13 +210,12 @@ const Navbar = () => {
           align-items: center;
           justify-content: center;
           padding: 24px 10px;
-          background: rgba(255, 255, 255, 0.88);
+          background: rgba(255, 255, 255, 0.95);
           backdrop-filter: blur(12px);
           border-right: 1px solid rgba(15, 23, 42, 0.08);
-          box-shadow: 4px 0 24px rgba(15, 23, 42, 0.06);
+          box-shadow: 4px 0 24px rgba(15, 23, 42, 0.1);
         }
 
-        /* Icon group centered vertically — equal space top & bottom */
         .sidebar-links {
           display: flex;
           flex-direction: column;
@@ -146,8 +277,8 @@ const Navbar = () => {
         }
 
         @media (max-width: 768px) {
-          .sidebar-nav {
-            width: 60px;
+          .sidebar-toggle {
+            display: flex;
           }
 
           .sidebar-inner {
@@ -170,8 +301,8 @@ const Navbar = () => {
         }
 
         @media (max-width: 480px) {
-          .sidebar-nav {
-            width: 56px;
+          .sidebar-nav--mobile {
+            width: 64px;
           }
 
           .sidebar-inner {

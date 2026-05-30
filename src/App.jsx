@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
+import ScrollToTop from './components/ScrollToTop';
 import TechOrbitBackground from './components/TechOrbitBackground';
 import Home from './pages/Home';
 import About from './pages/About';
@@ -13,6 +14,7 @@ import './styles/global.css';
 function App() {
   return (
     <Router>
+      <ScrollToTop />
       <div className="App" style={{ position: 'relative', minHeight: '100vh' }}>
         <TechOrbitBackground />
 
