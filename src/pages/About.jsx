@@ -45,7 +45,6 @@ const About = () => {
                   <video
                     className="about-video"
                     autoPlay
-                    muted
                     loop
                     playsInline
                     controls
