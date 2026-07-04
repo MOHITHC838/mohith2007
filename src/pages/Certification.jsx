@@ -21,10 +21,20 @@ import advancedDatabase from '../assets/certificateImage/advanveSql.png';
 import shopifyEcommerce from '../assets/certificateImage/ecommerceproject.png';
 import accessibleWebDev from '../assets/certificateImage/accessibleWeb.png';
 import noviTech from '../assets/certificateImage/MOHITH C .jpg';
+import yashTech from '../assets/certificateImage/yashTechnovates.jpg';
 
 const courseCertifications = [
   {
     id: 1,
+    title: 'intership certificate',
+    category: 'Full StackWeb Development',
+    platform: 'Yash Technovates',
+    verifyLink: 'https://coursera.org/share/a15fc84c3f1c5a11711eb5576aaca267',
+    image: yashTech,
+    description:   'Worked on real-world web development projects using JavaScript, Node.js, MongoDB and React. Developed responsive web pages, fixed UI issues, integrated APIs, and collaborated with the team to deliver high-quality web applications.',
+  },
+  {
+    id: 2,
     title: 'React JS Advanced Concepts & Application Development',
     category: 'Web Development',
     platform: 'Coursera',
@@ -34,7 +44,7 @@ const courseCertifications = [
       'Master advanced React concepts including hooks, Redux, performance optimization, and building scalable applications.',
   },
   {
-    id: 2,
+    id: 3,
     title: 'Advanced JavaScript',
     category: 'Web Development',
     platform: 'Coursera',
@@ -44,7 +54,7 @@ const courseCertifications = [
       'Learn advanced JavaScript concepts including closures, prototypes, async programming, and modern ES6+ features.',
   },
   {
-    id: 3,
+    id: 4,
     title: 'MERN Stack Development',
     category: 'Web Development',
     platform: 'Coursera',
@@ -54,7 +64,7 @@ const courseCertifications = [
       'Full-stack web development using MongoDB, Express.js, React, and Node.js with REST APIs.',
   },
   {
-    id: 4,
+    id: 5,
     title: 'Introduction to Java Programming: Java Fundamental Concepts',
     category: 'Programming Languages',
     platform: 'Coursera',
@@ -64,7 +74,7 @@ const courseCertifications = [
       'Learn the basics of Java programming including variables, control structures, and object-oriented programming concepts.',
   },
   {
-    id: 5,
+    id: 6,
     title: 'Python for Beginners: Variables and Strings',
     category: 'Programming Languages',
     platform: 'Coursera',
@@ -75,7 +85,7 @@ const courseCertifications = [
       'Learn Python programming fundamentals including variables, data types, and string manipulation.',
   },
   {
-    id: 6,
+    id: 7,
     title: 'Understanding Basic SQL Syntax',
     category: 'Database',
     platform: 'Coursera',
@@ -86,7 +96,7 @@ const courseCertifications = [
       'Comprehensive database design, SQL queries, normalization, and database management.',
   },
   {
-    id: 7,
+    id: 8,
     title: 'Introduction to Python',
     category: 'Programming Languages',
     platform: 'Coursera',
@@ -97,7 +107,7 @@ const courseCertifications = [
       'Learn Python programming fundamentals including variables, data types, and string manipulation.',
   },
   {
-    id: 8,
+    id: 9,
     title: 'Create Your First Web App with Python and Flask',
     category: 'Programming Languages',
     platform: 'Coursera',
@@ -107,7 +117,7 @@ const courseCertifications = [
     description: 'Learn Python programming fundamentals and create project using flask',
   },
   {
-    id: 9,
+    id: 10,
     title: 'Introduction to JavaScript',
     category: 'Web Development',
     platform: 'Coursera',
@@ -117,7 +127,7 @@ const courseCertifications = [
       'Learn the basics of JavaScript programming including variables, control structures, and object-oriented programming concepts.',
   },
   {
-    id: 10,
+    id: 11,
     title: 'Build Your Portfolio Website with HTML and CSS',
     category: 'Web Development',
     platform: 'Coursera',
@@ -126,7 +136,7 @@ const courseCertifications = [
     description: 'Learn HTML and CSS fundamentals and create a responsive portfolio website.',
   },
   {
-    id: 11,
+    id: 12,
     title: 'JavaScript Essentials for Beginners',
     category: 'Web Development',
     platform: 'Coursera',
@@ -136,7 +146,7 @@ const courseCertifications = [
       'Learn the basics of JavaScript programming including variables, control structures, and object-oriented programming concepts.',
   },
   {
-    id: 12,
+    id: 13, 
     title: 'Mastering JavaScript',
     category: 'Web Development',
     platform: 'Coursera',
@@ -146,7 +156,7 @@ const courseCertifications = [
       'Learn advanced JavaScript concepts including closures, prototypes, and asynchronous programming.',
   },
   {
-    id: 13,
+    id: 14,
     title: 'Modern JS: OOP, DOM & Events',
     category: 'Web Development',
     platform: 'Coursera',
@@ -156,7 +166,7 @@ const courseCertifications = [
       'Learn modern JavaScript concepts including OOP, DOM manipulation, and event handling.',
   },
   {
-    id: 14,
+    id: 15,
     title: 'Introduction to MongoDB',
     category: 'Database',
     platform: 'Coursera',
@@ -166,7 +176,7 @@ const courseCertifications = [
       'Learn the fundamentals of MongoDB and how to use it effectively in your applications.',
   },
   {
-    id: 15,
+    id: 16,
     title: 'Front-End Web Development (HTML, CSS & Bootstrap)',
     category: 'Web Development',
     platform: 'Coursera',
@@ -175,7 +185,7 @@ const courseCertifications = [
     description: 'Learn HTML and CSS fundamentals and create a responsive portfolio website.',
   },
   {
-    id: 16,
+    id: 17,
     title: 'Introduction to Git and GitHub',
     category: 'Version Control',
     platform: 'Coursera',
@@ -185,7 +195,7 @@ const courseCertifications = [
       'Learn Git and GitHub fundamentals and how to use them effectively in your development workflow.',
   },
   {
-    id: 17,
+    id: 18,
     title: 'Intermediate Object-Oriented Programming with Java',
     category: 'Programming Languages',
     platform: 'Coursera',
@@ -194,7 +204,7 @@ const courseCertifications = [
     description: 'Learn intermediate object-oriented programming concepts with Java.',
   },
   {
-    id: 18,
+    id: 19,
     title: 'Advanced Relational Database and SQL',
     category: 'Database',
     platform: 'Coursera',
@@ -203,7 +213,7 @@ const courseCertifications = [
     description: 'Learn advanced relational database concepts and SQL programming.',
   },
   {
-    id: 19,
+    id: 20,
     title: 'Create your e-commerce store with Shopify',
     category: 'Web Development Project',
     platform: 'Coursera',
@@ -213,7 +223,7 @@ const courseCertifications = [
       'Learn how to create an e-commerce store using Shopify and customize it with HTML and CSS.',
   },
   {
-    id: 20,
+    id: 21,
     title: 'Introduction to Accessible Web Development',
     category: 'Web Development',
     platform: 'Coursera',

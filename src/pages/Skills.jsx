@@ -76,9 +76,11 @@ const skillCategories = [
     title: 'AI Tools',
     color: '#6366f1',
     skills: [
-      { name: 'DeepSeek', icon: <SiTensorflow /> },
-      { name: 'ChatGPT', icon: <SiGooglecloud /> },
-      { name: 'Claude', icon: <SiTensorflow /> },
+        { name: 'DeepSeek', icon: <SiTensorflow /> },
+        { name: 'ChatGPT', icon: <SiGooglecloud /> },
+        { name: 'Gemini', icon: <SiTensorflow /> },
+          { name: 'Cursor', icon: <SiTensorflow /> },
+          { name: 'Perplexcity', icon: <SiTensorflow /> },
     ],
   },
   {
